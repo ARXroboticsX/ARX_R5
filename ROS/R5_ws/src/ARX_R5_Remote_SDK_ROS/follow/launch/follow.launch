@@ -1,0 +1,9 @@
+<launch>
+    <node pkg="follow" type="arm_follow_node" name="follow1">
+        <param name="bus_name" value="can1"/>
+    </node>
+    <node pkg="follow" type="arm_follow_node" name="follow2">
+        <param name="bus_name" value="can3"/>
+        <remap from="follow1_pos_back" to="follow2_pos_back"/>
+    </node>
+</launch>

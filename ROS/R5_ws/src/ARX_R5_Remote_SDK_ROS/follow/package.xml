@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>follow</name>
+    <version>0.0.0</version>
+    <description>TODO: Package description</description>
+    <maintainer email="nuc-ros2@todo.todo">nuc-ros2</maintainer>
+    <license>TODO: License declaration</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <depend>arx_msgs</depend>
+
+    <export>
+
+    </export>
+</package>

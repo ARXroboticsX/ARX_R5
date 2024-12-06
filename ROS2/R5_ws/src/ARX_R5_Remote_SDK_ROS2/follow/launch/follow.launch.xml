@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="follow" exec="arm_follow_node" name="follow1">
+        <param name="bus_name" value="can1"/>
+        <remap from="joint_control" to="follow1/joint_control"/>
+        <remap from="joint_information" to="follow1/joint_information"/>
+    </node>
+    <node pkg="follow" exec="arm_follow_node" name="follow2">
+        <param name="bus_name" value="can3"/>
+        <remap from="joint_control" to="follow2/joint_control"/>
+        <remap from="joint_information" to="follow2/joint_information"/>
+        <remap from="follow1_pos_back" to="follow2_pos_back"/>
+    </node>
+</launch>

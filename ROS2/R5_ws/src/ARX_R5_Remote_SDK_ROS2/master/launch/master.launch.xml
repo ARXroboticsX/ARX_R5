@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="master" exec="arm_master_node" name="master1">
+        <param name="bus_name" value="can0"/>
+        <remap from="joint_control" to="follow1/joint_control"/>
+    </node>
+    <node pkg="master" exec="arm_master_node" name="master2">
+        <param name="bus_name" value="can2"/>
+        <remap from="joint_control" to="follow2/joint_control"/>
+        <remap from="ARX_VR_L" to="ARX_VR_R"/>
+    </node>
+</launch>
