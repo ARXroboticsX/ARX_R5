@@ -3,7 +3,7 @@ project(arx_r5_controller)
 
 find_package(catkin REQUIRED COMPONENTS
         arm_control
-        arx_r5_msg
+        arx5_arm_msg
         roscpp
         std_msgs
         message_generation
@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS arm_control arx_r5_msg roscpp std_msgs
+  CATKIN_DEPENDS arm_control arx5_arm_msg roscpp std_msgs
 )
 
 include_directories(
@@ -28,19 +28,14 @@ target_include_directories(R5Controller PUBLIC lib/arx_hardware_interface/includ
 target_link_libraries(R5Controller ${catkin_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
 add_dependencies(R5Controller  ${catkin_EXPORTED_TARGETS})
 
-add_executable(R5ControllerVr src/R5ControllerVr.cpp)
-target_include_directories(R5ControllerVr PUBLIC lib/arx_hardware_interface/include lib/arx_r5_src/include)
-target_link_libraries(R5ControllerVr ${catkin_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
-add_dependencies(R5ControllerVr  ${catkin_EXPORTED_TARGETS})
-
-add_executable(KeyBoard src/KeyBoard.cpp)
-target_include_directories(KeyBoard PUBLIC lib/arx_hardware_interface/include lib/arx_r5_src/include)
-target_link_libraries(KeyBoard ${catkin_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
-add_dependencies(KeyBoard  ${catkin_EXPORTED_TARGETS})
+add_executable(R5KeyBoard src/KeyBoard.cpp)
+target_include_directories(R5KeyBoard PUBLIC lib/arx_hardware_interface/include lib/arx_r5_src/include)
+target_link_libraries(R5KeyBoard ${catkin_LIBRARIES} ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
+add_dependencies(R5KeyBoard  ${catkin_EXPORTED_TARGETS})
 
 install(TARGETS
         R5Controller
-        R5ControllerVr
+        R5KeyBoard
         DESTINATION lib/${PROJECT_NAME})
 
 install(FILES lib/arx_r5_src/libarx_r5_src.so lib/arx_hardware_interface/libarx_hardware_interface.so

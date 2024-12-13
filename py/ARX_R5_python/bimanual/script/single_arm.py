@@ -3,6 +3,7 @@ import numpy as np
 import os
 import sys
 import arx_r5_python as arx
+import arx_r5_python_tools as tools
 
 
 def quaternion_to_euler(quat: np.ndarray) -> Tuple[float, float, float]:
@@ -60,7 +61,6 @@ def euler_to_quaternion(roll: float, pitch: float, yaw: float) -> np.ndarray:
     z = cr * cp * sy - sr * sp * cy
 
     return np.array([w, x, y, z])
-
 
 class SingleArm:
     """
@@ -232,3 +232,9 @@ class SingleArm:
         # 或者可以直接在析构函数中释放资源
         print("销毁 SingleArm 对象")
         self.cleanup()
+
+def tool_forward_kinematics(joint_position: np.ndarray) -> np.ndarray:
+    tool = tools.InterfacesToolsPy(0)
+    ee_pose = tool.forward_kinematics_rpy([joint_position[0],joint_position[1],joint_position[2],joint_position[3],joint_position[4],joint_position[5]])
+    return np.array([ee_pose[0],ee_pose[1],ee_pose[2],ee_pose[3],ee_pose[4],ee_pose[5]])
+

@@ -1,4 +1,3 @@
-// example_class.cpp
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include "arx_r5_src/interfaces/InterfacesPy.hpp"
