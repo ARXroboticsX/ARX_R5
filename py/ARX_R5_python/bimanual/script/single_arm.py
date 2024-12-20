@@ -231,7 +231,7 @@ class SingleArm:
     def __del__(self):
         # 或者可以直接在析构函数中释放资源
         print("销毁 SingleArm 对象")
-        self.cleanup()
+        #self.cleanup()
 
 def tool_forward_kinematics(joint_position: np.ndarray) -> np.ndarray:
     tool = tools.InterfacesToolsPy(0)

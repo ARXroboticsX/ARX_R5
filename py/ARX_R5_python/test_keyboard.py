@@ -6,7 +6,7 @@ import curses
 import time
 
 arm_config: Dict[str, Any] = {
-    "can_port": "can0",
+    "can_port": "can1",
     "type": 0,
     # Add necessary configuration parameters for the left arm
 }

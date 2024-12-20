@@ -23,7 +23,7 @@ def test_single_arm(single_arm: SingleArm, duration: float = 10.0, dt: float = 0
         
 if __name__ == "__main__":
     arm_config: Dict[str, Any] = {
-        "can_port": "can0",
+        "can_port": "can1",
         "type": 0,
         # Add necessary configuration parameters for the left arm
     }
