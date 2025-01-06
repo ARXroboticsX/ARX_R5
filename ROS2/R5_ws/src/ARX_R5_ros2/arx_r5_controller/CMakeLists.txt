@@ -8,6 +8,9 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(arm_control REQUIRED)
 find_package(arx5_arm_msg REQUIRED)
 
+find_package(tf2_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+
 include_directories(include)
 
 # 添加共享库路径
@@ -17,13 +20,20 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 add_executable(R5Controller src/R5Controller.cpp)
 target_include_directories(R5Controller PUBLIC lib/arx_hardware_interface/include lib/arx_r5_src/include)
 target_link_libraries(R5Controller ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
-ament_target_dependencies(R5Controller rclcpp std_msgs arx5_arm_msg arm_control)
+ament_target_dependencies(R5Controller rclcpp std_msgs arx5_arm_msg arm_control tf2 tf2_msgs)
+
+# 添加可执行文件
+add_executable(R5Visualization src/R5Visualization.cpp)
+target_include_directories(R5Visualization PUBLIC lib/arx_hardware_interface/include lib/arx_r5_src/include)
+target_link_libraries(R5Visualization ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_r5_src/libarx_r5_src.so ${CMAKE_CURRENT_SOURCE_DIR}/lib/arx_hardware_interface/libarx_hardware_interface.so)
+ament_target_dependencies(R5Visualization rclcpp std_msgs arx5_arm_msg arm_control tf2 tf2_msgs)
 
 add_executable(KeyBoard src/KeyBoard.cpp)
 ament_target_dependencies(KeyBoard rclcpp std_msgs arx5_arm_msg)
 
 install(TARGETS
     R5Controller
+    R5Visualization
     KeyBoard
   DESTINATION lib/${PROJECT_NAME})
 
