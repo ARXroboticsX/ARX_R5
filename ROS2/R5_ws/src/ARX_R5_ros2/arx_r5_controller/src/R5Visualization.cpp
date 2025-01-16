@@ -2,7 +2,7 @@
 
 namespace arx::r5
 {
-    R5Visualization::R5Visualization() : Node("x5_visualization_node")
+    R5Visualization::R5Visualization() : Node("r5_visualization_node")
     {
         tools_ = std::make_unique<InterfacesTools>(0);
         // Create a subscription to the IMU topic
