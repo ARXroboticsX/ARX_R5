@@ -1,7 +1,7 @@
 **build/
 **devel/
 **.catkin_workspace
-.vscode/
+**.vscode/
 **build
 **install
 **log
