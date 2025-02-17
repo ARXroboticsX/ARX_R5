@@ -12,6 +12,7 @@ namespace arx::r5
         std::string package_name = "arx_r5_controller";
         std::string package_share_dir = ament_index_cpp::get_package_share_directory(package_name);
         int end_type = this->declare_parameter("arm_end_type", 0);
+        catch_control_mode_ = static_cast<CatchControlMode>(this->declare_parameter("catch_control_mode",0));
         std::string urdf_path;
         if(end_type == 0)
             urdf_path = package_share_dir + "/" + "X5liteaa0.urdf";
@@ -228,7 +229,10 @@ namespace arx::r5
         interfaces_ptr_->setJointPositions(target_joint_position);
         interfaces_ptr_->setArmStatus(InterfacesThread::state::POSITION_CONTROL);
 
-        interfaces_ptr_->setCatch(msg->joint_pos[6] * 5);
+        if (catch_control_mode_ == CatchControlMode::kPosition)
+            interfaces_ptr_->setCatch(msg->joint_pos[6] * 5);
+        else
+            interfaces_ptr_->setCatchTorque(msg->joint_cur[6]);
     }
 }
 

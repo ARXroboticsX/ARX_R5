@@ -2,12 +2,14 @@
 source ~/.bashrc
 workspace=$(pwd)
 
-# CAN
-gnome-terminal -t "can1" -x bash -c "cd ${workspace}/ARX_CAN/arx_can; ./arx_can1.sh; exec bash;"
+gnome-terminal -t "can1" -x bash -c "cd ${workspace}/../../..;cd ARX_CAN/arx_can; ./arx_can1.sh; exec bash;"
+sleep 1s
 # R5
-gnome-terminal -t "R5" -x  bash -c "cd ${workspace};cd ROS2/R5_ws; source install/setup.bash && ros2 launch arx_r5_controller open_vr_double_arm.launch.py; exec bash;"
+gnome-terminal -t "R5" -x  bash -c "cd ${workspace}/..; source devel/setup.bash && roslaunch arx_r5_controller open_vr_double_arm.launch; exec bash;"
+
 
 # VR
-gnome-terminal -t "unity_tcp" -x bash -c "cd ${workspace};cd ..;cd ARX_VR_SDK/ROS2 ;source install/setup.bash && ros2 run serial_port serial_port_node;exec bash;"
+gnome-terminal -t "unity_tcp" -x bash -c "cd ${workspace}/../../../..;cd ARX_VR_SDK/ROS ;source devel/setup.bash && rosrun serial_port serial_port;exec bash;"
 sleep 1
-gnome-terminal -t "arx5_pos_cmd" -x bash -c "cd ${workspace};cd ..;cd ARX_VR_SDK/ROS2 ;source install/setup.bash && ros2 topic echo /ARX_VR_L;exec bash;"
+gnome-terminal -t "arx5_pos_cmd" -x bash -c "cd ${workspace}/../../../..;cd ARX_VR_SDK/ROS;source devel/setup.bash && rostopic echo /ARX_VR_L;exec bash;"
+

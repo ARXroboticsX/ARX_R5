@@ -27,6 +27,11 @@ namespace arx::r5
 
     private:
         std::shared_ptr<InterfacesThread> interfaces_ptr_;
+        enum class CatchControlMode{
+            kPosition,
+            kTorque
+        } catch_control_mode_;
+
 
         // 通常 & remote从机模式下
         rclcpp::Publisher<arx5_arm_msg::msg::RobotStatus>::SharedPtr joint_state_publisher_;

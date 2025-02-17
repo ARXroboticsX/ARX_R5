@@ -14,6 +14,7 @@ namespace arx::r5
         std::string pub_topic_ee_name_v1 = nh.param("pub_topic_ee_name_v1", std::string("/arm_status_ee"));
         std::string pub_topic_joint_name_v1 = nh.param("pub_topic_joint_name_v1", std::string("/arm_status_joint"));
         std::string pub_topic_name_v2 = nh.param("pub_topic_name_v2", std::string("/arm_status"));
+        catch_control_mode_ = static_cast<CatchControlMode>(nh.param("catch_control_mode",0));
 
         arm_end_type_ = nh.param("arm_end_type", 0);
 
@@ -161,7 +162,10 @@ namespace arx::r5
         interfaces_ptr_->setJointPositions(target_joint_position);
         interfaces_ptr_->setArmStatus(InterfacesThread::state::POSITION_CONTROL);
 
-        interfaces_ptr_->setCatch(msg->joint_pos[6]);
+        if (catch_control_mode_ == CatchControlMode::kPosition)
+          interfaces_ptr_->setCatch(msg->joint_pos[6]);
+        else
+          interfaces_ptr_->setCatchTorque(msg->joint_cur[6]);
     }
 
     void R5Controller::JointControlCallbackV1(const arm_control::JointControl::ConstPtr &msg)

@@ -54,6 +54,11 @@ namespace arx::r5
         ros::Publisher joint_state_publisher_v1_;
         ros::Publisher ee_pos_publisher_v1_;
 
+        enum class CatchControlMode{
+          kPosition,
+          kTorque
+        } catch_control_mode_;
+
         ros::Timer timer_;
     };
 }
